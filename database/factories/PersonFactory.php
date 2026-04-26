@@ -18,10 +18,12 @@ class PersonFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
-            'phone' => $this->faker->phoneNumber(),
-            'date_of_birth' => $this->faker->date(),
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'phone' => fake()->phoneNumber(),
+            'date_of_birth' => fake()->date(),
+            'gender' => fake()->randomElement(['male', 'female', 'other']),
+            'city' => fake()->city(),
         ];
     }
 }
