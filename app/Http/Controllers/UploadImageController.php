@@ -30,7 +30,9 @@ class UploadImageController extends Controller
         //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         // ]);
 
-        // $imageName = time() . '.' . $request->image->extension();
+        // $imageName = 'photo' . md5(uniqid()) . time() . '.' . $request->image->extension();
+
+        // dd($imageName);
         // $request->image->move(public_path('images'), $imageName);
 
         // return back()->with('success', 'Image uploaded successfully.')->with('image', $imageName);
