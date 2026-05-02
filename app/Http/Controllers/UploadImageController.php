@@ -47,4 +47,44 @@ class UploadImageController extends Controller
 
         return redirect()->back();
     }
+
+    // Multiple image upload
+    function upload_multiple_image(){
+        return view('Upload_Multiple_Image');
+    }
+
+    function img_upload_multiple(Request $request){
+        // return dd($request->all());
+        // $request->validate([
+        //     'images' => 'required',
+        //     'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+
+        // foreach ($request->images as $image) {
+        //     $imageName = 'photo' . md5(uniqid()) . time() . '.' . $image->extension();
+        //     $image->move(public_path('assets/uploads'), $imageName);
+        // }
+
+        // return redirect()->back();
+
+        // Multiple image upload process (ostad)
+        // return dd($request->all());
+
+
+        $request->validate([
+            'images' => 'required',
+            // 'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+
+        // image upload
+        if($request->hasFile('images')){
+            $images = $request->file('images');
+            foreach ($images as $image) {
+                $fileNameToStore = 'multiple-photo-'. md5(uniqid()) . time() . '.' . $image->extension();
+                $image->move(public_path('assets/uploads'), $fileNameToStore);
+            }
+        }
+        return redirect()->back();
+    }
 }
