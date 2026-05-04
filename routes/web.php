@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 // Image upload in public folder
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/upload/single/image', [UploadImageController::class, 'upload_image'])->name('upload.image');
-Route::get('/upload+image', [UploadImageController::class, 'img_upload'])->name('img.upload');
+Route::post('/upload+image', [UploadImageController::class, 'img_upload'])->name('img.upload');
 
 // Multiple image upload
 Route::get('/upload/multiple/image', [UploadImageController::class, 'upload_multiple_image'])->name('upload.multiple.image');

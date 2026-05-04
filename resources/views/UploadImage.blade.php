@@ -9,7 +9,8 @@
             <h1>Single Image Upload to Public Folder</h1>
         </div>
         <div class="card-body">
-            <form action="{{ route('img.upload') }}" method="get" enctype="multipart/form-data">
+            <form action="{{ route('img.upload') }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <label for="" class="form-label">Upload Image</label>
                 <input type="file" name="image" class="form-control">
                 <button type="submit" class="btn btn-primary mt-3">Submit</button>

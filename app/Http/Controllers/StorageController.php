@@ -15,10 +15,13 @@ class StorageController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->storeAs('public/images', $imageName);
-
-        return back()->with('success','Image uploaded successfully.')->with('image',$imageName);
+        if($request->hasFile('image')){
+            $imageName = time().'_'.uniqid().'.'.$request->image->extension();
+            $request->image->storeAs('public/images', $imageName);
+            $request->file('image')->store('image', 'public');
+            return back();
+        }
+        
     }
 
     function upload_multiple_image_storage(){
@@ -35,6 +38,7 @@ class StorageController extends Controller
             $imageName = time().'_'.uniqid().'.'.$image->extension();
             $image->storeAs('public/images', $imageName);
             $imageNames[] = $imageName;
+            $image->store('images', 'public');
         }
 
         return back()->with('success','Images uploaded successfully.')->with('images',$imageNames);
